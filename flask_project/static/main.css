@@ -81,14 +81,14 @@ a.article-title:hover {
   font-size: 2.5rem;
 }
 
-textarea.form-control {
-  font-size: 20px;
-  padding: 15px;
+.form-control {
+  font-size: 1.2rem;
 }
 
 #left-text-area {
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
+  padding: 15px;
 }
 
 #right-text-area {
@@ -99,7 +99,25 @@ textarea.form-control {
   user-select: none;
 }
 
-textarea.form-control:focus {
+.form-control:focus {
   outline: none;
   box-shadow: 0 0 0 2px #535353;
+}
+
+.hr-sect {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.35);
+  margin: 8px 0px;
+}
+.hr-sect::before,
+.hr-sect::after {
+  content: "";
+  flex-grow: 1;
+  background: rgba(0, 0, 0, 0.35);
+  height: 1px;
+  font-size: 0px;
+  line-height: 0px;
+  margin: 0px 8px;
 }

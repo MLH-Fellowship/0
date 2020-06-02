@@ -1,6 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="input-group">
+        <input id="left-text-area" type="text" class="form-control" rows="20" cols="20" placeholder="Summarize from URL"></input>
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button">Go</button>
+        </div>
+    </div>
+    <div class="hr-sect">OR</div>
+    <div class="input-group">
         <textarea id="left-text-area" type="text" class="form-control" rows="20" cols="20" placeholder="Type or place English text here."></textarea>
         <span class="input-group-addon">-</span>
         <textarea id="right-text-area" type="text" class="form-control" rows="20" cols="20" disabled></textarea>
