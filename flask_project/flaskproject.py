@@ -1,7 +1,8 @@
 from flask import Flask, escape, request, render_template, url_for, flash, redirect
+import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '93590f0e3dc7099d1f75f2607779ad4f'
+app.config['SECRET_KEY'] = os.environ['SOME_SECRET_KEY']
 
 
 @app.route('/')
