@@ -9,6 +9,8 @@ import tensorflow as tf
 
 import model, sample, encoder
 
+tf.logging.set_verbosity(tf.logging.ERROR)
+
 def interact_model(
     model_name='124M',
     seed=None,
