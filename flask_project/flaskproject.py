@@ -10,11 +10,6 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/about')
-def about():
-    return render_template('about.html', title='About')
-
-
 # This condition is only true if we run the script directly
 # This helps avoid using environment variables
 # This way you can run the app by using 'python flaskproject.py'
