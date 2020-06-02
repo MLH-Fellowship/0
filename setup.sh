@@ -2,6 +2,19 @@ python -m venv env
 source env/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
+
+while getopts "f" flag; do
+    case "${flag}" in
+        f)
+        echo "Deleting existing 124M model"
+        if [ -d "models/124M" ]; then
+            rm -rf "models/124M"
+        fi
+        ;;
+        *) break;;
+    esac
+done
+
 echo "Downloading model..."
 if [ ! -d "models/124M" ]; then
     python download_model.py 124M
