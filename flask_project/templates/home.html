@@ -1,15 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="input-group">
-        <input id="left-text-area" type="text" class="form-control" rows="20" cols="20" placeholder="Summarize from URL"></input>
+        <input type="text" class="form-control" placeholder="Enter website URL"></input>
         <div class="input-group-append">
-            <button class="btn btn-primary" type="button">Go</button>
+            <button id="website-go-button" class="btn btn-primary" type="button">Go</button>
         </div>
     </div>
     <div class="hr-sect">OR</div>
-    <div class="input-group">
-        <textarea id="left-text-area" type="text" class="form-control" rows="20" cols="20" placeholder="Type or place English text here."></textarea>
-        <span class="input-group-addon">-</span>
-        <textarea id="right-text-area" type="text" class="form-control" rows="20" cols="20" disabled></textarea>
+    <div id="textarea-group">
+        <textarea type="text" class="form-control" placeholder="Type or place English text here."></textarea>
+        <button class="btn btn-primary mt-2 float-right" type="button">Go</button>
     </div>
+    <footer>
+        <p class="footer float-center text-center">Made with ♥ in Africa, Canada, and Italy</p>
+    </footer>
 {% endblock content %}

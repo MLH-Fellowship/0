@@ -83,20 +83,13 @@ a.article-title:hover {
 
 .form-control {
   font-size: 1.2rem;
-}
-
-#left-text-area {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
   padding: 15px;
+  border-radius: 10px;
 }
 
-#right-text-area {
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+#website-go-button {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .form-control:focus {
@@ -120,4 +113,16 @@ a.article-title:hover {
   font-size: 0px;
   line-height: 0px;
   margin: 0px 8px;
+}
+
+textarea.form-control {
+  height: 400px;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }
