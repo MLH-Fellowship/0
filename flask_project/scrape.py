@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+from collections import OrderedDict
 
 
 def get_string_contents_from_url(url):
@@ -14,8 +15,22 @@ def get_string_contents_from_url(url):
     req = requests.get(url, headers)
     soup = BeautifulSoup(req.content, 'html.parser')
 
-    scraped_text = []
+    scraped_text = {}
 
-    for p in soup.find_all('p'):
-        scraped_text.append(p.text)
-    return " ".join(scraped_text)
+    for header in soup.find_all(['h1', 'h2', 'h3']):
+        header.get_text()
+
+        p_all_text = []
+
+        for elem in header.next_siblings:
+            if elem.name and elem.name.startswith('h'):
+                break
+            if elem.name == 'p':
+                p_text = elem.get_text()
+                p_all_text.append(p_text)
+
+        all_p_combined_in_string = " ".join(p_all_text)
+
+        scraped_text[header.get_text()] = all_p_combined_in_string
+
+    return scraped_text
