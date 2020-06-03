@@ -4,16 +4,23 @@ nlp = spacy.load("en_core_web_lg")
 
 class TFSummarizer(object):
 
-    def get_summary(self, text, reduction_percent):
+    def get_summary(self, text, reduction_percent, ordered=False):
         doc = nlp(text.lower())
+        sentences = list(doc.sents)
 
         num_sentences = int(round(len(list(doc.sents))*(1-reduction_percent)))
         tokenFreq = self._calculate_term_frequency(doc)
         sentenceScore = self._rank_sentences(doc, tokenFreq)
 
         summarizedText = ""
-        for i in range(min(num_sentences, len(sentenceScore))): 
-            summarizedText += str(sentenceScore[i])
+        if ordered:
+            sentenceScore = sentenceScore[:num_sentences]
+            for sent in sentences:
+                if sent in sentenceScore:
+                    summarizedText += "{} ".format(str(sent))
+        else:
+            for i in range(min(num_sentences, len(sentenceScore))): 
+                summarizedText += str(sentenceScore[i])
         
         return summarizedText
 

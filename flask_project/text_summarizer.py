@@ -2,7 +2,16 @@ from term_frequency_summarizer import TFSummarizer
 from cosine_distance_summarizer import CosineDistanceSummarizer
 
 def get_summary(text, reduction_percent=0.5):
-    return TFSummarizer().get_summary(text, reduction_percent)
+    cds = CosineDistanceSummarizer()
+    tfs = TFSummarizer()
+    tfSummary = tfs.get_summary(text, reduction_percent)
+    tfSummaryO = tfs.get_summary(text, reduction_percent, ordered=True)
+    cosineGlove = cds.get_summary(text, reduction_percent, vector_type='glove')
+    cosineOccur = cds.get_summary(text, reduction_percent)
+    cosineGloveO = cds.get_summary(text, reduction_percent, vector_type='glove', ordered=True)
+    cosineOccurO = cds.get_summary(text, reduction_percent, ordered=True)
+
+    return "!!!tf summary: {} \n !!!tf summary ordered: {} \n !!!cosineGlove: {} \n !!!cosineGloveOrdered: {} \n !!!cosineOccurance: {} \n !!!cosineOccuranceOrdered: {} \n ".format(tfSummary, tfSummaryO, cosineGlove, cosineGloveO, cosineOccur, cosineOccurO)
 
 if __name__ == '__main__':
     print(get_summary("Facebook CEO Mark Zuckerberg held an extended conference with employees today, addressing accusations that Facebook \
@@ -17,7 +26,7 @@ if __name__ == '__main__':
         restricted the protest comments for “glorifying violence.” And Zuckerberg’s decision has proven controversial among employees, some of \
         whom staged a virtual walkout on Monday in protest. Echoing comments made last week, Zuckerberg said the choice upheld Facebook’s \
         dedication to free expression. “The presumption on our service is that you should be able to say what you want unless you’re causing\
-        a specific harm and we enumerate what the harms are and try to enforce them. And I do think that default is right,” he said.", 3))
+        a specific harm and we enumerate what the harms are and try to enforce them. And I do think that default is right,” he said."))
 
 
 

@@ -5,27 +5,33 @@ nlp = spacy.load("en_core_web_lg")
 
 class CosineDistanceSummarizer(object):
 
-    def get_summary(self, text, reduction_percent):
+    def get_summary(self, text, reduction_percent, vector_type="occurance", ordered=False):
         doc = nlp(text.lower())
         sentences = list(doc.sents)
         num_sentences = int(round(len(sentences)*(1-reduction_percent)))
 
-        matrix = self._create_cosine_similarity_matrix(sentences)
-        ranking = np.argsort(np.sum(matrix, axis=0))
+        matrix = self._create_cosine_similarity_matrix(sentences, vector_type)
+        ranking = np.argsort(-np.sum(matrix, axis=0))
+        ordered_ranking = sorted(ranking[:num_sentences])
 
         summary = ""
         for i in range(num_sentences):
-            summary += str(sentences[ranking[i]])
+            if ordered:
+                summary += str(sentences[ordered_ranking[i]]) + " "
+            else:
+                summary += str(sentences[ranking[i]])
         return summary
 
-    def _create_cosine_similarity_matrix(self, sentences):
+    def _create_cosine_similarity_matrix(self, sentences, vector_type):
         numSentences = len(sentences)
         matrix = np.zeros((numSentences, numSentences))
         for i in range(numSentences):
             for j in range(numSentences):
                 if i != j: 
-                    a = self._cosine_similarity_occurance(sentences[i], sentences[j])
-                    matrix[i][j] = a
+                    if vector_type == "occurance":
+                        matrix[i][j] = self._cosine_similarity_occurance(sentences[i], sentences[j])
+                    else:
+                        matrix[i][j] = self._cosine_similarity_word2vec(sentences[i], sentences[j])
         return matrix
 
     def _cosine_similarity_word2vec(self, sent1, sent2):
