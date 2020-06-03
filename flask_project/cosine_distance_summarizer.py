@@ -17,9 +17,9 @@ class CosineDistanceSummarizer(object):
         summary = ""
         for i in range(num_sentences):
             if ordered:
-                summary += str(sentences[ordered_ranking[i]]) + " "
+                summary += self._format_sentence(sentences[ordered_ranking[i]]) 
             else:
-                summary += str(sentences[ranking[i]])
+                summary += self._format_sentence(sentences[ranking[i]])
         return summary
 
     def _create_cosine_similarity_matrix(self, sentences, vector_type):
@@ -59,3 +59,12 @@ class CosineDistanceSummarizer(object):
                 vector2[all_words.index(token.text)] += 1
     
         return (np.dot(vector1, vector2) / (np.linalg.norm(vector1) * np.linalg.norm(vector2)))
+    
+    def _format_sentence(self, sentence):
+        stringSentence = ""
+        for i, word in enumerate(sentence):
+            if word.pos_ == 'PROPN' or i == 0:
+                stringSentence += word.text_with_ws.title()
+            else:
+                stringSentence += word.text_with_ws
+        return stringSentence

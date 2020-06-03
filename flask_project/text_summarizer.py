@@ -2,16 +2,7 @@ from term_frequency_summarizer import TFSummarizer
 from cosine_distance_summarizer import CosineDistanceSummarizer
 
 def get_summary(text, reduction_percent=0.5):
-    cds = CosineDistanceSummarizer()
-    tfs = TFSummarizer()
-    tfSummary = tfs.get_summary(text, reduction_percent)
-    tfSummaryO = tfs.get_summary(text, reduction_percent, ordered=True)
-    cosineGlove = cds.get_summary(text, reduction_percent, vector_type='glove')
-    cosineOccur = cds.get_summary(text, reduction_percent)
-    cosineGloveO = cds.get_summary(text, reduction_percent, vector_type='glove', ordered=True)
-    cosineOccurO = cds.get_summary(text, reduction_percent, ordered=True)
-
-    return "!!!tf summary: {} \n !!!tf summary ordered: {} \n !!!cosineGlove: {} \n !!!cosineGloveOrdered: {} \n !!!cosineOccurance: {} \n !!!cosineOccuranceOrdered: {} \n ".format(tfSummary, tfSummaryO, cosineGlove, cosineGloveO, cosineOccur, cosineOccurO)
+    return CosineDistanceSummarizer().get_summary(text, reduction_percent, ordered=True)
 
 if __name__ == '__main__':
     print(get_summary("Facebook CEO Mark Zuckerberg held an extended conference with employees today, addressing accusations that Facebook \

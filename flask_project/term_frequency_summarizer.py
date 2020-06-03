@@ -17,10 +17,10 @@ class TFSummarizer(object):
             sentenceScore = sentenceScore[:num_sentences]
             for sent in sentences:
                 if sent in sentenceScore:
-                    summarizedText += "{} ".format(str(sent))
+                    summarizedText += "{} ".format(self._format_sentence(sent))
         else:
-            for i in range(min(num_sentences, len(sentenceScore))): 
-                summarizedText += str(sentenceScore[i])
+            for i in range(num_sentences): 
+                summarizedText += self._format_sentence(sentenceScore[i])
         
         return summarizedText
 
@@ -47,3 +47,12 @@ class TFSummarizer(object):
                     else:
                         sentenceStrength[sentence] = tokenFreq[str(word)]
         return [k for k, _ in sorted(sentenceStrength.items(), key=lambda item:item[1], reverse=True)]
+    
+    def _format_sentence(self, sentence):
+        stringSentence = ""
+        for i, word in enumerate(sentence):
+            if word.pos_ == 'PROPN' or i == 0:
+                stringSentence += word.text_with_ws.title()
+            else:
+                stringSentence += word.text_with_ws
+        return stringSentence
