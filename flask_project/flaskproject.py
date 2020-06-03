@@ -2,6 +2,7 @@ from flask import Flask, escape, request, render_template, url_for, flash, redir
 from forms import SubmitWebsiteForm, SubmitTextForm
 import os
 from text_summarizer import get_summary
+from scrape import get_string_contents_from_url
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ['SOME_SECRET_KEY']
@@ -22,9 +23,10 @@ def home():
     return render_template('home.html', website_form=website_form, text_form=text_form)
 
 
-@app.route('/summarize')
-def summarize():
-    return 'Hello world'
+@app.route('/scrape')
+def scrape():
+    string_to_summarize = get_string_contents_from_url('https://www.theverge.com/interface/2020/6/3/21278233/mark-zuckerberg-facebook-walkout-employee-meeting-leaked-audio')
+    return string_to_summarize
 
 
 # This condition is only true if we run the script directly
