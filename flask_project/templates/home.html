@@ -1,15 +1,22 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="input-group">
-        <input type="text" class="form-control" placeholder="Enter website URL"></input>
-        <div class="input-group-append">
-            <button id="website-go-button" class="btn btn-primary" type="button">Go</button>
+    <form method="POST" action="">
+        {{ website_form.hidden_tag() }}
+        <div class="input-group">
+            {{ website_form.websiteUrl(class="form-control form-control-lg", placeholder="Enter Website URL") }}
+            <div class="input-group-append">
+                {{ website_form.submit(class="btn btn-primary website-go-button") }}
+            </div>
         </div>
-    </div>
+    </form>
+
     <div class="hr-sect">OR</div>
     <div id="textarea-group">
-        <textarea type="text" class="form-control" placeholder="Type or place English text here."></textarea>
-        <button class="btn btn-primary mt-2 float-right" type="button">Go</button>
+        <form method="POST" action="">
+            {{ text_form.hidden_tag() }}
+            {{ text_form.text(class="form-control", placeholder="Enter Website URL", placeholder="Type or place English text here.") }}
+            {{ text_form.submit(class="btn btn-primary mt-2 float-right") }}
+        </form>
     </div>
     <footer>
         <p class="footer float-center text-center">Made with ♥ in Africa, Canada, and Italy</p>
