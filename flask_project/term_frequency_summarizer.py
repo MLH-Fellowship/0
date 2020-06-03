@@ -4,8 +4,10 @@ nlp = spacy.load("en_core_web_lg")
 
 class TFSummarizer(object):
 
-    def get_summary(self, text, num_sentences):
+    def get_summary(self, text, reduction_percent):
         doc = nlp(text.lower())
+
+        num_sentences = int(round(len(list(doc.sents))*(1-reduction_percent)))
         tokenFreq = self._calculate_term_frequency(doc)
         sentenceScore = self._rank_sentences(doc, tokenFreq)
 
