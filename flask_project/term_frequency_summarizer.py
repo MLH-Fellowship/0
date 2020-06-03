@@ -17,7 +17,7 @@ class TFSummarizer(object):
             sentenceScore = sentenceScore[:num_sentences]
             for sent in sentences:
                 if sent in sentenceScore:
-                    summarizedText += "{} ".format(self._format_sentence(sent))
+                    summarizedText += "{}".format(self._format_sentence(sent))
         else:
             for i in range(num_sentences): 
                 summarizedText += self._format_sentence(sentenceScore[i])
