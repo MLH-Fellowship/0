@@ -27,9 +27,6 @@ def _calculate_term_frequency(doc):
     tokenFreq.update((k, v/maxFreq) for k,v in tokenFreq.items())
     return tokenFreq
 
-def _calculate_idf(vocab, text):
-    pass
-
 def _rank_sentences(doc, tokenFreq):
     sentenceStrength = {}
     for sentence in doc.sents:
