@@ -1,6 +1,7 @@
 from flask import Flask, escape, request, render_template, url_for, flash, redirect
 from forms import SubmitWebsiteForm, SubmitTextForm
 import os
+from text_summarizer import get_summary
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ['SOME_SECRET_KEY']
@@ -10,11 +11,13 @@ app.config['SECRET_KEY'] = os.environ['SOME_SECRET_KEY']
 def home():
     website_form = SubmitWebsiteForm()
     if website_form.validate_on_submit():
-        return f'Success! Now parse the web data from {website_form.websiteUrl.data}'
+        return f'Success! TODO: Now parse the web data from {website_form.websiteUrl.data}'
 
     text_form = SubmitTextForm()
     if text_form.validate_on_submit():
-        return f'Success! Now summarize from text {text_form.text.data}'
+        text = text_form.text.data
+        summary = get_summary(text)
+        return f'Text summary: {summary}'
 
     return render_template('home.html', website_form=website_form, text_form=text_form)
 
