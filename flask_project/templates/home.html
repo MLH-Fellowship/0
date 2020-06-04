@@ -99,7 +99,7 @@
     resultDiv = document.getElementById("resultDiv");
 
     populateExampleFromButton1.addEventListener("click", function () {
-        var example1 = "European scientists think they can now describe with confidence what's driving the drift of the North Magnetic Pole. \
+        textToSummarize.value = = "European scientists think they can now describe with confidence what's driving the drift of the North Magnetic Pole. \
 It's shifted in recent years away from Canada towards Siberia. And this rapid movement has required more frequent updates to navigation systems,\
 including those that operate the mapping functions in smartphones. A team, led from Leeds University, says the behaviour is explained by the competition \
 of two magnetic \"blobs\" on the edge of the Earth's outer core. Changes in the flow of molten material in the planet's interior have altered the strength \
@@ -111,8 +111,6 @@ classic dipole (its position alters little). And then there is the North Magneti
 It is this third pole that has been doing all the movement. When first identified by explorer James Clark Ross in the 1830s, it was in Canada's Nunavut territory.\
 Back then it didn't wander very far, very fast. But in the 1990s, it took off, racing to ever higher latitudes and crossing the date line in late 2017. \
 In the process, it came to within just a few hundred kilometres of the geographic pole.";
-        console.log("example 1 button pressed");
-        textToSummarize.value = example1
         textSubmissionButton.click();
     });
 
