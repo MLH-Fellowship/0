@@ -2,7 +2,9 @@
 {% block content %}
     <h2>What would you like to summarize?</h2>
     <div id="buttons">
-        <button id="exampleButton1" type="button" class="btn btn-outline-secondary float-left example-button">Try an Example</button>
+        <button id="exampleButton1" type="button" class="btn btn-outline-secondary float-left example-button">Example 1</button>
+        <button id="exampleButton2" type="button" class="btn btn-outline-secondary float-left example-button">Example 2</button>
+        <button id="exampleButton3" type="button" class="btn btn-outline-secondary float-left example-button">Example 3</button>
     </div>
     <div id="textarea-group">
         <form method="POST" action="">
@@ -72,7 +74,9 @@
   var phraseDiv;
   var resultDiv;
   var startSpeakTextAsyncButton;
-  var populateExampleFromButton;
+  var populateExampleFromButton1;
+  var populateExampleFromButton2;
+  var populateExampleFromButton3;
   var textToSummarize;
   var textSubmissionButton;
 
@@ -84,7 +88,9 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     startSpeakTextAsyncButton = document.getElementById("startSpeakTextAsyncButton");
-    populateExampleFromButton = document.getElementById("exampleButton1");
+    populateExampleFromButton1 = document.getElementById("exampleButton1");
+    populateExampleFromButton2 = document.getElementById("exampleButton2");
+    populateExampleFromButton3 = document.getElementById("exampleButton3");
     textToSummarize = document.getElementById("textToSum");
     textSubmissionButton = document.getElementById("submitButton")
     subscriptionKey = document.getElementById("subscriptionKey");
@@ -92,7 +98,7 @@
     phraseDiv = document.getElementById("phraseDiv");
     resultDiv = document.getElementById("resultDiv");
 
-    populateExampleFromButton.addEventListener("click", function () {
+    populateExampleFromButton1.addEventListener("click", function () {
         var example1 = "European scientists think they can now describe with confidence what's driving the drift of the North Magnetic Pole. \
 It's shifted in recent years away from Canada towards Siberia. And this rapid movement has required more frequent updates to navigation systems,\
 including those that operate the mapping functions in smartphones. A team, led from Leeds University, says the behaviour is explained by the competition \
@@ -105,7 +111,13 @@ classic dipole (its position alters little). And then there is the North Magneti
 It is this third pole that has been doing all the movement. When first identified by explorer James Clark Ross in the 1830s, it was in Canada's Nunavut territory.\
 Back then it didn't wander very far, very fast. But in the 1990s, it took off, racing to ever higher latitudes and crossing the date line in late 2017. \
 In the process, it came to within just a few hundred kilometres of the geographic pole.";
-        var example2 = "Wearable company Fitbit has officially unveiled the Fitbit Flow, a new ventilator with FDA approval for use during the COVID-19 pandemic.\
+        console.log("example 1 button pressed");
+        textToSummarize.value = example1
+        textSubmissionButton.click();
+    });
+
+    populateExampleFromButton2.addEventListener("click", function () {
+        textToSummarize.value = "Wearable company Fitbit has officially unveiled the Fitbit Flow, a new ventilator with FDA approval for use during the COVID-19 pandemic.\
  The ventilator has been granted emergency use authorization by the FDA, meaning it can only be used to treat people during the current health crisis. Fitbit tells\
  The Verge that it hopes to sell the Flow for around $5,000, significantly less than traditional ventilators, and that production is scheduled to begin this month. \
  As its low cost might suggest, Fitbit doesn’t see the Flow as a like-for-like replacement for traditional ventilators. The company says that it’s only designed be \
@@ -118,7 +130,11 @@ In the process, it came to within just a few hundred kilometres of the geographi
  the patients who’ll need them during the pandemic. The Wall Street Journal reported that in April the US government had been scrambling to buy thousands of ventilators \
  to deal with the crisis, but that demand for the machines had ended up being lower than expected. However, the ventilators may end up being needed if the virus \
  spreads further, or due to other factors like the start of the influenza season later in the year, the WSJ notes.";
-        var example3 = "Pressure is mounting from all directions on Facebook CEO Mark Zuckerberg for his refusal to take action against posts from President Donald Trump. \
+        textSubmissionButton.click();
+    });
+
+    populateExampleFromButton3.addEventListener("click", function () {
+        textToSummarize.value = "Pressure is mounting from all directions on Facebook CEO Mark Zuckerberg for his refusal to take action against posts from President Donald Trump. \
 The latest salvo comes from 33 former employees who worked at the company during its early stages, including some who helped create Facebook’s original community guidelines. \
 The open letter was first published by The New York Times; we have republished the letter in full below. While many of the arguments in the letter have been made before, \
 including recently by The Verge, the letter published today presents a singularly clear and strongly argued case against Zuckerberg’s position. The group of former employees \
@@ -130,9 +146,6 @@ mounting internal dissent, including a Monday walkout, Zuckerberg promised emplo
 “President Trump’s post on Friday not only threatens violence by the state against its citizens, it also sends a signal to millions who take cues from the president,” the \
 authors write. “In an age of live-streamed shootings, Facebook should know the danger of this better than most. Trump’s rhetoric, steeped in the history of American racism, \
 targeted people whom Facebook would not allow to repeat his words back to him.”";
-        let exampleArray = [example1, example2, example3];
-        console.log("example button pressed");
-        textToSummarize.value = exampleArray[Math.floor(Math.random() * Math.floor(3))]
         textSubmissionButton.click();
     });
 
