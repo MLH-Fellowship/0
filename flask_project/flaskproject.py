@@ -11,14 +11,24 @@ app.config['SECRET_KEY'] = os.environ['SOME_SECRET_KEY']
 @app.route('/', methods=['GET', 'POST'])
 def home():
     website_form = SubmitWebsiteForm()
-    if website_form.validate_on_submit():
-        return f'Success! TODO: Now parse the web data from {website_form.websiteUrl.data}'
-
     text_form = SubmitTextForm()
+
+    if website_form.validate_on_submit():
+        website_url = website_form.websiteUrl.data
+        dict = scrape(website_url)
+
+        summary_dict = {}
+        for header, p in dict.items():
+            summary_dict[header] = get_summary(p)
+
+        context = {'summary_dict': summary_dict}
+        return render_template('home.html', website_form=website_form, text_form=text_form, context=context)
+
     if text_form.validate_on_submit():
         text = text_form.text.data
         summary = get_summary(text)
-        context = {'summary': summary}
+        summary_dict = {'Summary': summary}
+        context = {'summary_dict': summary_dict}
 
         # Calculate time saved by summary
         minutes_before = estimate_reading_time(text)

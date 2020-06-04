@@ -15,7 +15,7 @@ def get_string_contents_from_url(url):
     req = requests.get(url, headers)
     soup = BeautifulSoup(req.content, 'html.parser')
 
-    scraped_text = {}
+    scraped_text_dict = {}
 
     for header in soup.find_all(['h1', 'h2', 'h3']):
         header.get_text()
@@ -31,6 +31,7 @@ def get_string_contents_from_url(url):
 
         all_p_combined_in_string = " ".join(p_all_text)
 
-        scraped_text[header.get_text()] = all_p_combined_in_string
+        scraped_text_dict[header.get_text()] = all_p_combined_in_string
 
-    return scraped_text
+    # Remove key value pairs that have an empty value
+    return {k: v for k, v in scraped_text_dict.items() if v is not ""}

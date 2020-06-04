@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h2>What would you like to summarize?</h2>
+    <h2 class="mb-2">What would you like to summarize?</h2>
+    <p>TL;DR: summarize any text on the fly.</p>
     <div id="textarea-group">
-        <form method="POST" action="">
+        <form method="POST">
             {{ text_form.hidden_tag() }}
 
             {% if text_form.text.errors %}
@@ -16,37 +17,39 @@
                 {{ text_form.text(class="form-control", placeholder="Enter Website URL", placeholder="Type or place English text to summarize here.") }}
             {% endif %}
 
-            {{ text_form.submit(class="btn btn-primary mt-2") }}
+            {{ text_form.submit_text(class="btn btn-primary mt-2") }}
         </form>
     </div>
     <div class="hr-sect">OR</div>
-    <form method="POST" action="">
+    <form method="POST">
         {{ website_form.hidden_tag() }}
         <div class="input-group">
             {{ website_form.websiteUrl(class="form-control form-control-lg", placeholder="Enter Website URL (beta)") }}
             <div class="input-group-append">
-                {{ website_form.submit(class="btn btn-primary website-go-button") }}
+                {{ website_form.submit_website(class="btn btn-primary website-go-button") }}
             </div>
         </div>
     </form>
-    {% if context and context.summary %}
-        <div id="summary-section" class="mt-4 mb-4">
+
+    {% if context and context.summary_dict %}
+        <h2 class="mt-4 mb-2">Your TL;DR</h2>
+        {% if context.minutes_saved %}
+            <p>This {{ context.reduction_percentage }}% text reduction will save you {{ context.minutes_saved }} minutes. Way to go! 🎉</p>
+        {% elif context.reduction_percentage %}
+            <p>The text was reduced by {{ context.reduction_percentage }}%. Enjoy the extra time  💖</p>
+        {% endif %}
+        {% for header, summary in context.summary_dict.items() %}
+        <div id="summary-section" >
           <input id="subscriptionKey" type="text" size="40" value="36e5268307b74c7d83a33fa4d6fd630a" hidden>
           <input id="serviceRegion" type="text" size="40" value="eastus" hidden></td>
-            <h2>Your Summary</h2>
-            {% if context.minutes_saved %}
-                <p>This {{ context.reduction_percentage }}% text reduction will save you {{ context.minutes_saved }} minutes. Way to go! 🎉</p>
-            {% elif context.reduction_percentage %}
-                <p>The text was reduced by {{ context.reduction_percentage }}%. Enjoy the extra time  💖</p>
-            {% endif %}
             <textarea id="phraseDiv" style="display: inline-block;width:500px;height:200px" hidden>{{context.summary}}</textarea>
             <div class="card">
               <div class="card-header">
-                Summary
+                {{ header }}
               </div>
               <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                  <p>{{ context.summary }}</p>
+                  <p>{{ summary }}</p>
                 </blockquote>
 
                 <button type="button" id="startSpeakTextAsyncButton" class="btn btn-primary float-right">
@@ -60,6 +63,9 @@
             </div>
             <div align="right"><div id="resultDiv" class="text-success mt-2"></div>
         </div>
+        {% endfor %}
+    {% elif context and not context.summary_dict %}
+        <p class="text-error mt-2">It looks like we weren't able to parse that. Maybe try with a different website.</p>
     {% endif %}
     <!-- <quickstartcode> -->
 <!-- Speech SDK USAGE -->
