@@ -116,7 +116,7 @@ a.article-title:hover {
 }
 
 textarea.form-control {
-  height: 400px;
+  height: 250px;
 }
 
 .footer {
@@ -125,4 +125,14 @@ textarea.form-control {
   bottom: 0;
   width: 100%;
   text-align: center;
+}
+
+small {
+  text-align: center;
+  width: 100%;
+}
+
+.custombtn {
+    display: flex;
+    justify-self: flex-end;
 }
