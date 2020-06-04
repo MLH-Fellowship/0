@@ -4,7 +4,7 @@ import os
 from text_summarizer import get_summary
 from scrape import get_string_contents_from_url
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static',)
 app.config['SECRET_KEY'] = os.environ['SOME_SECRET_KEY']
 
 
@@ -18,8 +18,9 @@ def home():
     if text_form.validate_on_submit():
         text = text_form.text.data
         summary = get_summary(text)
-        return f'Text summary: {summary}'
-
+        context = {'summary': summary}
+        return render_template('response.html', **context)
+    
     return render_template('home.html', website_form=website_form, text_form=text_form)
 
 
