@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+    <h2>What would you like to summarize?</h2>
     <div id="textarea-group">
         <form method="POST" action="">
             {{ text_form.hidden_tag() }}
@@ -31,13 +32,119 @@
                 <blockquote class="blockquote mb-0">
                   <p>{{ context.summary }}</p>
                 </blockquote>
+
                 <button type="button" id="startSpeakTextAsyncButton" class="btn btn-primary float-right">
                     <i class="fa fa-play" aria-hidden="true"></i>Listen
                 </button>
+
+                <button type="button" id="startSpeakTextAsyncButton" class="btn btn-outline-secondary float-right mr-2">
+                    <i class="fa fa-play" aria-hidden="true"></i>Copy
+                </button>
+
               </div>
             </div>
         </div>
     {% endif %}
-    <p class="text-center">Made with ♥ in Africa, Canada, and Italy</p>
-
 {% endblock content %}
+
+ <!-- <quickstartcode> -->
+  <!-- Speech SDK USAGE -->
+  <script>
+
+    // status fields and start button in UI
+    var phraseDiv;
+    var resultDiv;
+    var startSpeakTextAsyncButton;
+
+    // subscription key and region for speech services.
+    var subscriptionKey, serviceRegion;
+    var authorizationToken;
+    var SpeechSDK;
+    var synthesizer;
+
+    document.addEventListener("DOMContentLoaded", function () {
+      startSpeakTextAsyncButton = document.getElementById("startSpeakTextAsyncButton");
+      subscriptionKey = document.getElementById("subscriptionKey");
+      serviceRegion = document.getElementById("serviceRegion");
+      phraseDiv = document.getElementById("phraseDiv");
+      resultDiv = document.getElementById("resultDiv");
+
+      startSpeakTextAsyncButton.addEventListener("click", function () {
+        var soundContext = undefined;
+        try {
+          var AudioContext = window.AudioContext || window.webkitAudioContext || false;
+          if (AudioContext) {
+            soundContext = new AudioContext();
+          } else {
+            alert("AudioContext not supported");
+          }
+        }
+        catch(e){
+          window.console.log("no sound context found, no audio output. " + e);
+        }
+
+        startSpeakTextAsyncButton.disabled = true;
+
+        // if we got an authorization token, use the token. Otherwise use the provided subscription key
+        var speechConfig;
+        if (authorizationToken) {
+          speechConfig = SpeechSDK.SpeechConfig.fromAuthorizationToken(authorizationToken, serviceRegion.value);
+        } else {
+          if (subscriptionKey.value === "" || subscriptionKey.value === "subscription") {
+            alert("Please enter your Microsoft Cognitive Services Speech subscription key!");
+            startSpeakTextAsyncButton.disabled = false;
+            return;
+          }
+          speechConfig = SpeechSDK.SpeechConfig.fromSubscription(subscriptionKey.value, serviceRegion.value);
+        }
+
+        synthesizer = new SpeechSDK.SpeechSynthesizer(speechConfig);
+
+        var inputText = phraseDiv.value;
+        synthesizer.speakTextAsync(
+          inputText,
+          function (result) {
+            startSpeakTextAsyncButton.disabled = false;
+            resultDiv.innerHTML = "playing...";
+
+            window.console.log(result);
+            if (result.audioData && soundContext) {
+              var source = soundContext.createBufferSource();
+              soundContext.decodeAudioData(result.audioData, function (newBuffer) {
+                source.buffer = newBuffer;
+                source.connect(soundContext.destination);
+                source.start(0);
+              });
+            }
+
+            synthesizer.close();
+            synthesizer = undefined;
+          },
+          function (err) {
+            startSpeakTextAsyncButton.disabled = false;
+            resultDiv.innerHTML += "Error: ";
+            resultDiv.innerHTML += err;
+            resultDiv.innerHTML += "\n";
+            window.console.log(err);
+
+            synthesizer.close();
+            synthesizer = undefined;
+          });
+      });
+
+      if (!!window.SpeechSDK) {
+        SpeechSDK = window.SpeechSDK;
+        startSpeakTextAsyncButton.disabled = false;
+
+        document.getElementById('content').style.display = 'block';
+        document.getElementById('warning').style.display = 'none';
+
+        // in case we have a function for getting an authorization token, call it.
+        if (typeof RequestAuthorizationToken === "function") {
+          RequestAuthorizationToken();
+        }
+      }
+    });
+
+
+  </script>
