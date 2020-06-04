@@ -34,14 +34,14 @@
         <div id="summary-section" class="mt-4 mb-4">
             <h2>Your Summary</h2>
             {% if context.minutes_saved %}
-                <p>You just saved {{ context.minutes_saved }} minutes of your time by summarizing the text with a {{ context.reduction_percentage }} reduction. Yay!</p>
+                <p>This {{ context.reduction_percentage }}% text reduction will save you {{ context.minutes_saved }} minutes. Way to go! 🎉</p>
             {% elif context.reduction_percentage %}
                 <p>The text was reduced by {{ context.reduction_percentage }}%. Enjoy the extra time  💖</p>
             {% endif %}
 
             <div class="card">
               <div class="card-header">
-                Heading Title
+                Summary
               </div>
               <div class="card-body">
                 <blockquote class="blockquote mb-0">
