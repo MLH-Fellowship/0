@@ -24,6 +24,9 @@ def home():
         minutes_after = estimate_reading_time(summary)
         minutes_saved = round(minutes_before - minutes_after)
 
+        reduction_percentage = 100 * (len(text) - len(summary)) / len(text)
+        context['reduction_percentage'] = round(reduction_percentage)
+
         # Only show UI if time saved is substantial
         if minutes_saved > 1:
             context['minutes_saved'] = minutes_saved

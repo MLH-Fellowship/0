@@ -4,7 +4,18 @@
     <div id="textarea-group">
         <form method="POST" action="">
             {{ text_form.hidden_tag() }}
-            {{ text_form.text(class="form-control", placeholder="Enter Website URL", placeholder="Type or place English text to summarize here.") }}
+
+            {% if text_form.text.errors %}
+                {{ text_form.text(class="form-control is-invalid", placeholder="Enter Website URL", placeholder="Type or place English text to summarize here.") }}
+                <div class="invalid-feedback">
+                    {% for error in text_form.text.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ text_form.text(class="form-control", placeholder="Enter Website URL", placeholder="Type or place English text to summarize here.") }}
+            {% endif %}
+
             {{ text_form.submit(class="btn btn-primary mt-2") }}
         </form>
     </div>
@@ -22,7 +33,11 @@
     {% if context and context.summary %}
         <div id="summary-section" class="mt-4 mb-4">
             <h2>Your Summary</h2>
-            <p>You just saved {{ context.minutes_saved }} minutes of your time by summarizing the text. Yay!</p>
+            {% if context.minutes_saved %}
+                <p>You just saved {{ context.minutes_saved }} minutes of your time by summarizing the text with a {{ context.reduction_percentage }} reduction. Yay!</p>
+            {% elif context.reduction_percentage %}
+                <p>The text was reduced by {{ context.reduction_percentage }}%. Enjoy the extra time  💖</p>
+            {% endif %}
 
             <div class="card">
               <div class="card-header">
