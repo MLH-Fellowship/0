@@ -58,7 +58,7 @@
                 </button>
               </div>
             </div>
-            <div align="left"><strong>Status:</strong> <span id="resultDiv" class="text-success"></div>
+            <div align="right"><div id="resultDiv" class="text-success mt-2"></div>
         </div>
     {% endif %}
     <!-- <quickstartcode> -->
@@ -114,12 +114,14 @@
 
       synthesizer = new SpeechSDK.SpeechSynthesizer(speechConfig);
 
+      resultDiv.innerHTML = "Downloading audio file...";
+
       var inputText = phraseDiv.value;
       synthesizer.speakTextAsync(
         inputText,
         function (result) {
           startSpeakTextAsyncButton.disabled = false;
-          resultDiv.innerHTML = "playing...";
+          resultDiv.innerHTML = "";
 
           window.console.log(result);
           if (result.audioData && soundContext) {
