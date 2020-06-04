@@ -93,19 +93,46 @@
     resultDiv = document.getElementById("resultDiv");
 
     populateExampleFromButton.addEventListener("click", function () {
-        console.log("example button pressed");
-        textToSummarize.value = "European scientists think they can now describe with confidence what's driving the drift of the North Magnetic Pole. \
+        var example1 = "European scientists think they can now describe with confidence what's driving the drift of the North Magnetic Pole. \
 It's shifted in recent years away from Canada towards Siberia. And this rapid movement has required more frequent updates to navigation systems,\
 including those that operate the mapping functions in smartphones. A team, led from Leeds University, says the behaviour is explained by the competition \
-of two magnetic \"blobs\" on the edge of the Earth's outer core. Changes in the flow of molten material in the planet's interior have altered the strength\
+of two magnetic \"blobs\" on the edge of the Earth's outer core. Changes in the flow of molten material in the planet's interior have altered the strength \
 of the above regions of negative magnetic flux. \"This change in the pattern of flow has weakened the patch under Canada and ever so slightly increased \
-the strength of the patch under Siberia,\" explained Dr Phil Livermore. \"This is why the North Pole has left its historic position over the Canadian Arctic\
+the strength of the patch under Siberia,\" explained Dr Phil Livermore. \"This is why the North Pole has left its historic position over the Canadian Arctic \
 and crossed over the International Date Line. Northern Russia is winning the \'tug of war\', if you like,\" he told BBC News.Earth has three poles at the \
 top of the planet. A geographic pole which is where the planet's rotation axis intersects the surface. The geomagnetic pole is the location which best fits a \
 classic dipole (its position alters little). And then there is the North Magnetic, or dip, Pole, which is where field lines are perpendicular to the surface.\
 It is this third pole that has been doing all the movement. When first identified by explorer James Clark Ross in the 1830s, it was in Canada's Nunavut territory.\
 Back then it didn't wander very far, very fast. But in the 1990s, it took off, racing to ever higher latitudes and crossing the date line in late 2017. \
 In the process, it came to within just a few hundred kilometres of the geographic pole.";
+        var example2 = "Wearable company Fitbit has officially unveiled the Fitbit Flow, a new ventilator with FDA approval for use during the COVID-19 pandemic.\
+ The ventilator has been granted emergency use authorization by the FDA, meaning it can only be used to treat people during the current health crisis. Fitbit tells\
+ The Verge that it hopes to sell the Flow for around $5,000, significantly less than traditional ventilators, and that production is scheduled to begin this month. \
+ As its low cost might suggest, Fitbit doesn’t see the Flow as a like-for-like replacement for traditional ventilators. The company says that it’s only designed be \
+ used when one of the more expensive devices is not available. Although the ventilator has secured regulatory approval for use during the pandemic, Fitbit says that \
+ it is not otherwise FDA cleared or approved. Fitbit says that the Flow is designed around resuscitator bags used by paramedics, but features additional sensors and \
+ alarms to help monitor patients. The wearable company consulted with medical staff and practitioners while developing the ventilator, which it hopes will be easier \
+ to use than traditional ventilators. \“We saw an opportunity to rally our expertise in advanced sensor development, manufacturing, and our global supply chain to \
+ address the critical and ongoing need for ventilators and help make a difference in the global fight against this virus, \” Fitbit’s CEO and co-founder James Park \
+ said in a statement. Fitbit announced its ambitions to produce a ventilator last month after concerns emerged that there aren’t enough of the machines to treat all \
+ the patients who’ll need them during the pandemic. The Wall Street Journal reported that in April the US government had been scrambling to buy thousands of ventilators \
+ to deal with the crisis, but that demand for the machines had ended up being lower than expected. However, the ventilators may end up being needed if the virus \
+ spreads further, or due to other factors like the start of the influenza season later in the year, the WSJ notes.";
+        var example3 = "Pressure is mounting from all directions on Facebook CEO Mark Zuckerberg for his refusal to take action against posts from President Donald Trump. \
+The latest salvo comes from 33 former employees who worked at the company during its early stages, including some who helped create Facebook’s original community guidelines. \
+The open letter was first published by The New York Times; we have republished the letter in full below. While many of the arguments in the letter have been made before, \
+including recently by The Verge, the letter published today presents a singularly clear and strongly argued case against Zuckerberg’s position. The group of former employees \
+argues that Facebook’s position on moderating Trump is inconsistent, that it consciously exposes the public to dangers the company has seen before, and that it creates a \
+tautological double-standard that makes the speech of the most powerful “inviolable.” Zuckerberg has maintained that Facebook should not become the “arbiter of truth” and \
+said that his position on Trump’s tweets is based on research and conversation. While he expressed disgust with Trump’s racist language, he concluded that the president’s \
+“when the looting starts, the shooting starts!” post had “no history of being read as a dog whistle for vigilante supporters to take justice into their own hands.” Following \
+mounting internal dissent, including a Monday walkout, Zuckerberg promised employees that the company would “re-examine policies about states threatening the use of force.” \
+“President Trump’s post on Friday not only threatens violence by the state against its citizens, it also sends a signal to millions who take cues from the president,” the \
+authors write. “In an age of live-streamed shootings, Facebook should know the danger of this better than most. Trump’s rhetoric, steeped in the history of American racism, \
+targeted people whom Facebook would not allow to repeat his words back to him.”";
+        let exampleArray = [example1, example2, example3];
+        console.log("example button pressed");
+        textToSummarize.value = exampleArray[Math.floor(Math.random() * Math.floor(3))]
         textSubmissionButton.click();
     });
 
