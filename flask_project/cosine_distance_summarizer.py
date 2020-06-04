@@ -4,8 +4,22 @@ import numpy as np
 nlp = spacy.load("en_core_web_lg")
 
 class CosineDistanceSummarizer(object):
+    """
+    Class to summmarize text based on text rank.
+    """
 
     def get_summary(self, text, reduction_percent, vector_type="occurance", ordered=False):
+        """
+        Function to produce text summary. 
+
+        Parameters:
+            text (str): Text to convert to summary.
+            reduction_percent (float): Decimal representation of how much text to reduce (i.e. 0.5 = 50%).
+            vector_type(str): Type of sentence vector to use. Options: "occurance" or "glove".
+            ordered (bool): Set to true if summary should retain sentence order from text. Default is False.
+        Returns:
+            summary (str): A summary of text. 
+        """
         doc = nlp(text.lower())
         sentences = list(doc.sents)
         num_sentences = int(round(len(sentences)*(1-reduction_percent)))
