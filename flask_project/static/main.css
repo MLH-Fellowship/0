@@ -136,3 +136,8 @@ small {
     display: flex;
     justify-self: flex-end;
 }
+
+.example-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
