@@ -1,24 +1,45 @@
 {% extends "layout.html" %}
 {% block content %}
+    <div id="textarea-group">
+        <form method="POST" action="">
+            {{ text_form.hidden_tag() }}
+            {{ text_form.text(class="form-control", placeholder="Enter Website URL", placeholder="Type or place English text to summarize here.") }}
+            {{ text_form.submit(class="btn btn-primary mt-2") }}
+        </form>
+    </div>
+    <div class="hr-sect">OR</div>
     <form method="POST" action="">
         {{ website_form.hidden_tag() }}
         <div class="input-group">
-            {{ website_form.websiteUrl(class="form-control form-control-lg", placeholder="Enter Website URL") }}
+            {{ website_form.websiteUrl(class="form-control form-control-lg", placeholder="Enter Website URL (beta)") }}
             <div class="input-group-append">
                 {{ website_form.submit(class="btn btn-primary website-go-button") }}
             </div>
         </div>
     </form>
 
-    <div class="hr-sect">OR</div>
-    <div id="textarea-group">
-        <form method="POST" action="">
-            {{ text_form.hidden_tag() }}
-            {{ text_form.text(class="form-control", placeholder="Enter Website URL", placeholder="Type or place English text here.") }}
-            {{ text_form.submit(class="btn btn-primary mt-2 float-right") }}
-        </form>
-    </div>
-    <footer>
+    {% if context and context.summary %}
+        <div id="summary-section" class="mt-4 mb-4">
+            <h2>Your Summary</h2>
+            <p>You just saved {{ context.minutes_saved }} minutes of your time by summarizing the text. Yay!</p>
+
+            <div class="card">
+              <div class="card-header">
+                Heading Title
+              </div>
+              <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                  <p>{{ context.summary }}</p>
+                </blockquote>
+                <button type="button" id="startSpeakTextAsyncButton" class="btn btn-primary float-right">
+                    <i class="fa fa-play" aria-hidden="true"></i>Listen
+                </button>
+              </div>
+            </div>
+        </div>
+    {% endif %}
+
+<!--     <footer>
         <p class="footer float-center text-center">Made with ♥ in Africa, Canada, and Italy</p>
-    </footer>
+    </footer> -->
 {% endblock content %}
