@@ -13,4 +13,4 @@ class SubmitWebsiteForm(FlaskForm):
 class SubmitTextForm(FlaskForm):
     text = TextAreaField('Text', validators=[
         DataRequired(), Length(min=150)])
-    submit_text = SubmitField('Go')
+    submit = SubmitField('Go')
