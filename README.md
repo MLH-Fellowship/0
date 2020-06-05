@@ -1,5 +1,5 @@
 # Welcome to TL;DR:!
-TL;DR: a web app that summarizes texts of any size to help users save time, powered by Flask, jinja2, NLP libraries, text-to-speech, and more.
+TL;DR: a web app that summarizes texts of any size to help users save time, powered by Flask, jinja2, NLP libraries, text-to-speech, and more. Live demo link coming soon once we get it on Heroku.
 
 ![screenshot of TL;DR website](tldr_screenshot.png?raw=true )
 
@@ -18,7 +18,7 @@ When the summary is displayed on the user interface, users can choose to copy th
 On the text summarization side, we learnt that sometimes it’s hard to get research models to do what their papers say they can do (we were unsuccessful at getting OpenAI’s GPT-2 to summarize). On the other hand, we learned a lot about extractive models and the challenges of the text summarization task. On the frontend side, we learnt that Flask can be an incredible tool to build powerful web applications. We were able to easily run the NLP Python scripts within Flask and serve the content through API routes and Jinja2. We also experimented with using Issues and Milestones to track project progress in Github.
 
 ## Open Source Projects
-We used several Open Source libraries in our project to create the best user experience possible for our users. Flask is used to serve the API endpoints and the web page users can interact with. Jinja2, which is part of Flask, was used to render the content into HTML pages. spaCy, a Natural Language Processing library, made it easy for us to get the summary out of any text. If the user enters a website URL, we use BeautifulSoup to scrape the website contents by creating a dictionary containing the page headings as for the keys, and the paragraphs for the values.
+We used several Open Source libraries in our project to create the best user experience possible for our users. [Flask](https://github.com/pallets/flask) is used to serve the API endpoints and the web page users can interact with. [Jinja2](https://github.com/pallets/jinja), which is part of Flask, was used to render the content into HTML pages. [spaCy](https://github.com/explosion/spaCy), a Natural Language Processing library, made it easy for us to get the summary out of any text. If the user enters a website URL, we use [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) to scrape the website contents by creating a dictionary containing the page headings as for the keys, and the paragraphs for the values.
 
 ## Individual Contributors
 
@@ -43,9 +43,13 @@ Referenced from these tutorials: [GloVe vector tutorial](https://appliedmachinel
 Model variations were empirically compared. The final product uses TextRank with word occurrence vectors, and retains the original sentence order from the text. 
 
 ## Run the project
+To run the app, create a secret token by using```export SOME_SECRET_KEY=YOUR_KEY_HERE``` (replace `YOUR_KEY_HERE`) with your key. Then, install the dependencies from the `requirements.txt` file by using `pip install requirements.txt`. Finally, run `python flaskproject.py`.
 
 ## What's next
 We’re always looking for ways to improve. We’re very happy to have hacked something users can use from day 1, and we’ll be continuously looking for user feedback. We’re specifically looking into adding markup support and building a Chrome extension to summarize the entire Internet. Feel free to open an issue here to provide feedback or contribute.
+
+## Try it out
+Live demo link coming soon once we get it on Heroku.
 
 ## License
 This project is under the [MIT License](/LICENSE)
