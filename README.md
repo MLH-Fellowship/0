@@ -1,6 +1,8 @@
 # Welcome to TL;DR:!
 TL;DR: web that summarizes texts of any size to help users save time, powered by Flask, jinja2, NLP libraries, text-to-speech, and more.
-> add image
+
+![screenshot of TL;DR website](tdlr_screenshot.png?raw=true )
+
 
 ## Why TL;DR:?
 We wanted to find ways to let people summarize anything - be it an article, a school essay, or a Reddit comment - to help them save time and become more productive. We decided to create an app that made use of the latest findings in NLP to summarize web pages and read it aloud. We especially focused on helping kids struggling with reading long texts because of dyslexia, and blind people that deal with unnecessarily long web pages every day by adding text-to-speech functionality.
