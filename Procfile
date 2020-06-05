@@ -1,1 +1,1 @@
-web: gunicorn flaskproject.wsgi
+web: gunicorn ptldr.wsgi --log-file
