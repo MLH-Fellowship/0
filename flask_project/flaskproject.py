@@ -5,7 +5,6 @@ from text_summarizer import get_summary
 from scrape import get_string_contents_from_url
 
 app = Flask(__name__, static_folder='static',)
-app.config['SECRET_KEY'] = os.environ['SOME_SECRET_KEY']
 
 
 @app.route('/', methods=['GET', 'POST'])
