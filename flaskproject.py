@@ -54,10 +54,3 @@ def count_words_in_text(text, word_length):
     total_words = 0
     total_words += len(text) / word_length
     return total_words
-
-
-# This condition is only true if we run the script directly
-# This helps avoid using environment variables
-# This way you can run the app by using 'python flaskproject.py'
-if __name__ == '__main__':
-    app.run(debug=True)
