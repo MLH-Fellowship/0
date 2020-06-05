@@ -1,5 +1,5 @@
 # Welcome to TL;DR:!
-TL;DR: web that summarizes texts of any size to help users save time, powered by Flask, jinja2, NLP libraries, text-to-speech, and more.
+TL;DR: a web app that summarizes texts of any size to help users save time, powered by Flask, jinja2, NLP libraries, text-to-speech, and more.
 
 ![screenshot of TL;DR website](tdlr_screenshot.png?raw=true )
 
@@ -15,7 +15,7 @@ We implemented multiple NLP algorithms, such as TF-IDF and TextRank, to get the 
 When the summary is displayed on the user interface, users can choose to copy the text into the clipboard or use the “Listen” button powered by the Microsoft Text-to-Speech API to read the summary out loud. Finally, we added some algorithms to inform users about how much the text was reduced, and how much time they saved by using the tool.
 
 ## What we learned
-On the text summarization side, we learnt that sometimes it’s hard to get research models to do what their papers say they can do (we were unsuccessful at getting OpenAI’s GPT-2 to summarize). On the other hand, we learned a lot about extractive models and the challenges of the text summarization task. On the frontend side, we learnt that Flask can be an incredible tool to build powerful web applications. We were able to easily run the NLP Python scripts within Flask and serve the content through API routes and Jinja2. We also experimented with using Issues and Milestones to track project progress in Github
+On the text summarization side, we learnt that sometimes it’s hard to get research models to do what their papers say they can do (we were unsuccessful at getting OpenAI’s GPT-2 to summarize). On the other hand, we learned a lot about extractive models and the challenges of the text summarization task. On the frontend side, we learnt that Flask can be an incredible tool to build powerful web applications. We were able to easily run the NLP Python scripts within Flask and serve the content through API routes and Jinja2. We also experimented with using Issues and Milestones to track project progress in Github.
 
 ## Open Source Projects
 We used several Open Source libraries in our project to create the best user experience possible for our users. Flask is used to serve the API endpoints and the web page users can interact with. Jinja2, which is part of Flask, was used to render the content into HTML pages. spaCy, a Natural Language Processing library, made it easy for us to get the summary out of any text. If the user enters a website URL, we use BeautifulSoup to scrape the website contents by creating a dictionary containing the page headings as for the keys, and the paragraphs for the values.
