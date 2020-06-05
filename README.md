@@ -1,7 +1,7 @@
 # Welcome to TL;DR:!
 TL;DR: a web app that summarizes texts of any size to help users save time, powered by Flask, jinja2, NLP libraries, text-to-speech, and more.
 
-![screenshot of TL;DR website](tdlr_screenshot.png?raw=true )
+![screenshot of TL;DR website](tldr_screenshot.png?raw=true )
 
 
 ## Why TL;DR:?
