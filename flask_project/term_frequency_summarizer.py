@@ -1,6 +1,6 @@
 import spacy
 
-nlp = spacy.load("en_core_web_lg")
+nlp = spacy.load("en_core_web_md")
 
 class TFSummarizer(object):
     """
@@ -9,14 +9,14 @@ class TFSummarizer(object):
 
     def get_summary(self, text, reduction_percent, ordered=False):
         """
-        Function to produce text summary. 
+        Function to produce text summary.
 
         Parameters:
             text (str): Text to convert to summary.
             reduction_percent (float): Decimal representation of how much text to reduce (i.e. 0.5 = 50%).
-            ordered (bool): Set to true if summary should retain sentence order from text. Default is False. 
+            ordered (bool): Set to true if summary should retain sentence order from text. Default is False.
         Returns:
-            summary (str): A summary of text. 
+            summary (str): A summary of text.
         """
         doc = nlp(text.lower())
         sentences = list(doc.sents)
@@ -32,9 +32,9 @@ class TFSummarizer(object):
                 if sent in sentenceScore:
                     summarizedText += "{}".format(self._format_sentence(sent))
         else:
-            for i in range(num_sentences): 
+            for i in range(num_sentences):
                 summarizedText += self._format_sentence(sentenceScore[i])
-        
+
         return summarizedText
 
     def _calculate_term_frequency(self, doc):
@@ -60,7 +60,7 @@ class TFSummarizer(object):
                     else:
                         sentenceStrength[sentence] = tokenFreq[str(word)]
         return [k for k, _ in sorted(sentenceStrength.items(), key=lambda item:item[1], reverse=True)]
-    
+
     def _format_sentence(self, sentence):
         stringSentence = ""
         for i, word in enumerate(sentence):
