@@ -1,10 +1,8 @@
 from flask import Flask, escape, request, render_template, url_for, flash, redirect
 from forms import SubmitWebsiteForm, SubmitTextForm
-import os
 from text_summarizer import get_summary
 
 app = Flask(__name__, static_folder='static',)
-app.config['SECRET_KEY'] = os.environ['SOME_SECRET_KEY']
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -54,3 +52,7 @@ def count_words_in_text(text, word_length):
     total_words = 0
     total_words += len(text) / word_length
     return total_words
+
+
+if __name__ == "__main__":
+    app.run()
