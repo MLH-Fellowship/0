@@ -1,1 +1,1 @@
-web: gunicorn ptldr.wsgi --log-file
+web: gunicorn wsgi --log-file -
