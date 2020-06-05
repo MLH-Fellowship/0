@@ -1,11 +1,11 @@
 from flask import Flask, escape, request, render_template, url_for, flash, redirect
 from forms import SubmitWebsiteForm, SubmitTextForm
-import os
 from text_summarizer import get_summary
 from scrape import get_string_contents_from_url
+import os
 
 app = Flask(__name__, static_folder='static',)
-app.config['SECRET_KEY'] = os.environ['SOME_SECRET_KEY']
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'Optional default value')
 
 
 @app.route('/', methods=['GET', 'POST'])

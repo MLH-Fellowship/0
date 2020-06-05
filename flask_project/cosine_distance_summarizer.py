@@ -1,7 +1,7 @@
 import spacy
 import numpy as np
 
-nlp = spacy.load("en_core_web_md")
+nlp = spacy.load("en_core_web_sm")
 
 class CosineDistanceSummarizer(object):
     """
