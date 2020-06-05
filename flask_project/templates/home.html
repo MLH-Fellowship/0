@@ -1,23 +1,27 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h2 class="mb-2">What would you like to summarize?</h2>
-    <p>TL;DR: summarize any text on the fly.</p>
+    <h2>What would you like to summarize?</h2>
+    <div id="buttons">
+        <button id="exampleButton1" type="button" class="btn btn-outline-secondary float-left example-button">Example 1</button>
+        <button id="exampleButton2" type="button" class="btn btn-outline-secondary float-left example-button">Example 2</button>
+        <button id="exampleButton3" type="button" class="btn btn-outline-secondary float-left example-button">Example 3</button>
+    </div>
     <div id="textarea-group">
         <form method="POST">
             {{ text_form.hidden_tag() }}
 
             {% if text_form.text.errors %}
-                {{ text_form.text(class="form-control is-invalid", placeholder="Enter Website URL", placeholder="Type or place English text to summarize here.") }}
+                {{ text_form.text(id="textToSumErr",class="form-control is-invalid", placeholder="Enter Website URL", placeholder="Type or place English text to summarize here.") }}
                 <div class="invalid-feedback">
                     {% for error in text_form.text.errors %}
                         <span>{{ error }}</span>
                     {% endfor %}
                 </div>
             {% else %}
-                {{ text_form.text(class="form-control", placeholder="Enter Website URL", placeholder="Type or place English text to summarize here.") }}
+                {{ text_form.text(id="textToSum", class="form-control", placeholder="Enter Website URL", placeholder="Type or place English text to summarize here.") }}
             {% endif %}
 
-            {{ text_form.submit_text(class="btn btn-primary mt-2") }}
+            {{ text_form.submit(id="submitButton", class="btn btn-primary mt-2") }}
         </form>
     </div>
     <div class="hr-sect">OR</div>
@@ -75,6 +79,12 @@
   var phraseDiv;
   var resultDiv;
   var startSpeakTextAsyncButton;
+  var populateExampleFromButton1;
+  var populateExampleFromButton2;
+  var populateExampleFromButton3;
+  var textToSummarize;
+  var textToSummarizeErrorState;
+  var textSubmissionButton;
 
   // subscription key and region for speech services.
   var subscriptionKey, serviceRegion;
@@ -84,10 +94,73 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     startSpeakTextAsyncButton = document.getElementById("startSpeakTextAsyncButton");
+    populateExampleFromButton1 = document.getElementById("exampleButton1");
+    populateExampleFromButton2 = document.getElementById("exampleButton2");
+    populateExampleFromButton3 = document.getElementById("exampleButton3");
+    textToSummarize = document.getElementById("textToSum");
+    textToSummarizeErrorState = document.getElementById("textToSumErr");
+    textSubmissionButton = document.getElementById("submitButton")
     subscriptionKey = document.getElementById("subscriptionKey");
     serviceRegion = document.getElementById("serviceRegion");
     phraseDiv = document.getElementById("phraseDiv");
     resultDiv = document.getElementById("resultDiv");
+
+    function populateExample(example) {
+        if (textToSummarizeErrorState != null) {
+            textToSummarizeErrorState.value = example;
+        }
+        else {
+            textToSummarize.value = example;
+        }
+        textSubmissionButton.click();
+    }
+
+    populateExampleFromButton1.addEventListener("click", function () {
+        let example1 = "European scientists think they can now describe with confidence what's driving the drift of the North Magnetic Pole. \
+It's shifted in recent years away from Canada towards Siberia. And this rapid movement has required more frequent updates to navigation systems, \
+including those that operate the mapping functions in smartphones. A team, led from Leeds University, says the behaviour is explained by the competition \
+of two magnetic \"blobs\" on the edge of the Earth's outer core. Changes in the flow of molten material in the planet's interior have altered the strength \
+of the above regions of negative magnetic flux. \"This change in the pattern of flow has weakened the patch under Canada and ever so slightly increased \
+the strength of the patch under Siberia,\" explained Dr Phil Livermore. \"This is why the North Pole has left its historic position over the Canadian Arctic \
+and crossed over the International Date Line. Northern Russia is winning the \'tug of war\', if you like,\" he told BBC News.Earth has three poles at the \
+top of the planet. A geographic pole which is where the planet's rotation axis intersects the surface. The geomagnetic pole is the location which best fits a \
+classic dipole (its position alters little). And then there is the North Magnetic, or dip, Pole, which is where field lines are perpendicular to the surface. \
+It is this third pole that has been doing all the movement. When first identified by explorer James Clark Ross in the 1830s, it was in Canada's Nunavut territory. \
+Back then it didn't wander very far, very fast. But in the 1990s, it took off, racing to ever higher latitudes and crossing the date line in late 2017. \
+In the process, it came to within just a few hundred kilometres of the geographic pole.";
+        populateExample(example1);
+    });
+
+    populateExampleFromButton2.addEventListener("click", function () {
+        let example2 =  "Wearable company Fitbit has officially unveiled the Fitbit Flow, a new ventilator with FDA approval for use during the COVID-19 pandemic.\
+ The ventilator has been granted emergency use authorization by the FDA, meaning it can only be used to treat people during the current health crisis. Fitbit tells\
+ The Verge that it hopes to sell the Flow for around $5,000, significantly less than traditional ventilators, and that production is scheduled to begin this month. \
+ As its low cost might suggest, Fitbit doesn’t see the Flow as a like-for-like replacement for traditional ventilators. The company says that it’s only designed be \
+ used when one of the more expensive devices is not available. Although the ventilator has secured regulatory approval for use during the pandemic, Fitbit says that \
+ it is not otherwise FDA cleared or approved. Fitbit says that the Flow is designed around resuscitator bags used by paramedics, but features additional sensors and \
+ alarms to help monitor patients. The wearable company consulted with medical staff and practitioners while developing the ventilator, which it hopes will be easier \
+ to use than traditional ventilators. \“We saw an opportunity to rally our expertise in advanced sensor development, manufacturing, and our global supply chain to \
+ address the critical and ongoing need for ventilators and help make a difference in the global fight against this virus, \” Fitbit’s CEO and co-founder James Park \
+ said in a statement. Fitbit announced its ambitions to produce a ventilator last month after concerns emerged that there aren’t enough of the machines to treat all \
+ the patients who’ll need them during the pandemic. The Wall Street Journal reported that in April the US government had been scrambling to buy thousands of ventilators \
+ to deal with the crisis, but that demand for the machines had ended up being lower than expected. However, the ventilators may end up being needed if the virus \
+ spreads further, or due to other factors like the start of the influenza season later in the year, the WSJ notes.";
+        populateExample(example2);
+    });
+
+    populateExampleFromButton3.addEventListener("click", function () {
+        let example3 = "Marvel villains suck. Most of the villains pose negligible threat to the hero and does bad things just because they are the villain. For example, \
+take Malekith from Thor The Dark World. He was not even nearly as powerful as Thor. Also, he didn’t have any solid motive behind his pursuit for the Aether. He said he wants \
+to return the universe to its original dark state. What the fuck! The original dark state was there before the big bang, and there’s just one character who is that old and he’s \
+a lot cooler than Malekith. After Big Bang, the universe as we know it was formed. Then where is the dark state? I found him extremely shallow and one dimensional. Take another one, \
+Whiplash from Iron Man 2. Okay, he may have a reason to hurt Tony as Howard probably did something bad with his father. However, at no point of the film did he appear a threat to Tony. \
+He wanted to beat Tony in a suit similar to Iron Man? What was he thinking? However, the award for worst villain probably goes to Ultron from Avengers Age of Ultron. He was a peacekeeping \
+program whose main goal was to save the Earth. He deduced humans are the greatest threat to Earth and thus decided to destroy them. Fine till now. Later, when he fights the Avengers \
+in Sokovia, why the fuck did he say “This what I always wanted! All of you, against all of me.” Dude, you never wanted that. You wanted total destruction. Agreed the Avengers were a \
+threat to your mission, but they were not your mission! But not all villains are like them. Hela, Vulture, Thanos etc were a gem of a villain. They posed a great threat, had real \
+motives behind there actions and at a point, even made us think they are gonna win (Thanos actually won). I hope Marvel cures this problem in the future."
+        populateExample(example3);
+    });
 
     startSpeakTextAsyncButton.addEventListener("click", function () {
       var soundContext = undefined;
