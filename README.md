@@ -1,5 +1,5 @@
 # Welcome to TL;DR:!
-TL;DR: a web app that summarizes texts of any size to help users save time, powered by Flask, jinja2, NLP libraries, text-to-speech, and more. Live demo link coming soon once we get it on Heroku.
+TL;DR: a web app that summarizes texts of any size to help users save time, powered by Flask, jinja2, NLP libraries, text-to-speech, and more. Live demo link coming soon once we get it on Heroku. [Try it out live](https://ptldr.herokuapp.com/).
 
 ![screenshot of TL;DR website](tldr_screenshot.png?raw=true )
 
@@ -49,7 +49,7 @@ To run the app, create a secret token by using```export SOME_SECRET_KEY=YOUR_KEY
 We’re always looking for ways to improve. We’re very happy to have hacked something users can use from day 1, and we’ll be continuously looking for user feedback. We’re specifically looking into adding markup support and building a Chrome extension to summarize the entire Internet. Feel free to open an issue here to provide feedback or contribute.
 
 ## Try it out
-Live demo link coming soon once we get it on Heroku.
+We deployed the web app to Heroku. [Try it out live](https://ptldr.herokuapp.com/).
 
 ## License
 This project is under the [MIT License](/LICENSE)
